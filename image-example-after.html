@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Intersection observer</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <div class="container">
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box">
+      <img class="image item-1" data-lazy="https://picsum.photos/2500/1656" />
+    </div>
+    <div class="box">
+      <img class="image item-2" data-lazy="https://picsum.photos/2500/1656" />
+    </div>
+    <div class="box">
+      <img class="image item-3" data-lazy="https://picsum.photos/2500/1656" />
+    </div>
+    <div class="box">
+      <img class="image item-4" data-lazy="https://picsum.photos/2500/1656" />
+    </div>
+    <div class="box">
+      <img class="image item-5" data-lazy="https://picsum.photos/2500/1656" />
+    </div>
+    <div class="box">
+      <img class="image item-6" data-lazy="https://picsum.photos/2500/1656" />
+    </div>
+    <div class="box">
+      <img class="image item-7" data-lazy="https://picsum.photos/2500/1656" />
+    </div>
+    <div class="box">
+      <img class="image item-8" data-lazy="https://picsum.photos/2500/1656" />
+    </div>
+    <div class="box">
+      <img class="image item-9" data-lazy="https://picsum.photos/2500/1656" />
+    </div>
+    <div class="box">
+      <img class="image item-10" data-lazy="https://picsum.photos/2500/1656" />
+    </div>
+    <div class="box">
+      <img class="image item-11" data-lazy="https://picsum.photos/2500/1656" />
+    </div>
+    <div class="box">
+      <img class="image item-12" data-lazy="https://picsum.photos/2500/1656" />
+    </div>
+    <div class="box">
+      <img class="image item-13" data-lazy="https://picsum.photos/2500/1656" />
+    </div>
+    <div class="box">
+      <img class="image item-14" data-lazy="https://picsum.photos/2500/1656" />
+    </div>
+    <div class="box">
+      <img class="image item-15" data-lazy="https://picsum.photos/2500/1656" />
+    </div>
+    <div class="box">
+      <img class="image item-16" data-lazy="https://picsum.photos/2500/1656" />
+    </div>
+    <div class="box">
+      <img class="image item-17" data-lazy="https://picsum.photos/2500/1656" />
+    </div>
+    <div class="box">
+      <img class="image item-18" data-lazy="https://picsum.photos/2500/1656" />
+    </div>
+    <div class="box">
+      <img class="image item-19" data-lazy="https://picsum.photos/2500/1656" />
+    </div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+  </div>
+  <script>
+    const images = document.querySelectorAll('.image');
+    const callback = (entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          console.log(entry.target);
+          const img = entry.target;
+          const src = img.dataset.lazy;
+
+          img.setAttribute('src', src);
+          observer.disconnect();
+        }
+      });
+    };
+    const options = {
+      rootMargin: '100px 0px 500px 0px',
+      threshold: .2,
+    };
+    const lazyLoad = target => {
+      const io = new IntersectionObserver(callback, options);
+      io.observe(target);
+    };
+    images.forEach(lazyLoad);
+  </script>
+</body>
+</html>

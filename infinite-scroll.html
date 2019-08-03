@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Intersection observer</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <div id="root" class="container">
+    <div class="box">1</div>
+    <div class="box">2</div>
+    <div class="box">3</div>
+    <div class="box">4</div>
+    <div class="box">5</div>
+    <div class="box">6</div>
+    <div class="box">7</div>
+    <div class="box">8</div>
+    <div class="box">9</div>
+    <div class="box">10</div>
+  </div>
+  <div id="more-items" class="load-more">Load More </div>
+  <script>
+    const container = document.getElementById('root');
+    const moreItems = document.getElementById('more-items');
+    const boxTemplate = item => `<div class="box">${item}</div>`;
+    const options = {
+      //root,
+      // rootMargin: '300px 10px 300px 10px',
+      threshold: 1,
+    };
+    const callback = (entries, observer) => {
+      if (entries[0].isIntersecting) {
+        const newItems = new Array(10).fill(0);
+        const newTemplate = newItems.map((_, index) => boxTemplate(index + 11)).join('');
+        container.innerHTML = `${container.innerHTML}${newTemplate}`;
+      }
+    };
+    const observer = new IntersectionObserver(callback, options);
+    observer.observe(moreItems);
+  </script>
+</body>
+</html>

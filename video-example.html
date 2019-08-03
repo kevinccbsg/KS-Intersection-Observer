@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Intersection observer</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <div class="container">
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box">
+      <video id="video" muted src="/Example.mp4"> 
+      </video>
+    </div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+  </div>
+  <script>
+    const video = document.getElementById('video');
+    const playVideo = () => {
+      video.play();
+      video.muted = false;
+    };
+    const pauseVideo = () => {
+      video.pause();
+    };
+    const options = {
+      //root,
+      // rootMargin: '300px 10px 300px 10px',
+      threshold: 1,
+    };
+    const callback = (entries, observer) => {
+      console.log('Called!!');
+      console.log(entries);
+      console.log(observer);
+      if (entries[0].isIntersecting) {
+        playVideo();
+      } else {
+        pauseVideo();
+      }
+    };
+    const observer = new IntersectionObserver(callback, options);
+    observer.observe(video);
+  </script>
+</body>
+</html>
+
+
+
+
+
+
